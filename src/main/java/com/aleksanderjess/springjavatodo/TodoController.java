@@ -1,16 +1,19 @@
+package com.aleksanderjess.springjavatodo;
+
 import com.aleksanderjess.springjavatodo.model.Todo;
 import com.aleksanderjess.springjavatodo.service.TodoService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 
-@Controller
+@RestController
 @RequestMapping("/api/v1/todos")
 public class TodoController {
 
     TodoService _todoService;
+    Logger logger = Logger.getLogger(TodoController.class.getName());
 
     public TodoController(TodoService todoService) {
         this._todoService = todoService;
@@ -28,6 +31,7 @@ public class TodoController {
 
     @PostMapping("/")
     public Todo create(@RequestBody Todo todo) {
+        logger.info("com.aleksanderjess.springjavatodo.TodoController.create");
         return _todoService.save(todo);
     }
 
